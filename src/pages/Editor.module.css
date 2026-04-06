@@ -1,0 +1,52 @@
+.wrapper { position: relative; display: flex; flex-direction: column; height: calc(100vh - 64px); overflow: hidden; }
+
+.editorNav { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 1.5rem; border-bottom: 0.5px solid var(--outline-v); background: var(--surf-0); flex-shrink: 0; }
+.editorNavLeft { display: flex; align-items: center; gap: 1rem; }
+.editorNavTitle { font-family: var(--fn); font-size: 1rem; font-weight: 600; color: var(--on-surf); }
+.editorNavSub { font-size: 0.75rem; color: var(--on-surf-v); font-style: italic; }
+.editorNavActions { display: flex; gap: 0.5rem; }
+.btnOutline { background: transparent; border: 0.5px solid var(--outline-v); color: var(--on-surf-v); padding: 7px 16px; border-radius: var(--r-xl); font-size: 0.82rem; transition: all 0.2s; }
+.btnOutline:hover { background: var(--surf-hi); color: var(--on-surf); }
+.btnPrimary { background: var(--pr); color: var(--on-pr); border: none; padding: 7px 16px; border-radius: var(--r-xl); font-size: 0.82rem; font-weight: 500; transition: background 0.2s; }
+.btnPrimary:hover { background: var(--pr-dim); }
+
+.splitLayout { display: grid; grid-template-columns: 380px 1fr; flex: 1; overflow: hidden; }
+
+.editorPanel { overflow-y: auto; border-right: 0.5px solid var(--outline-v); padding: 1.5rem; background: var(--surf); display: flex; flex-direction: column; gap: 0; }
+.panelTitle { font-family: var(--fn); font-size: 1.2rem; font-weight: 600; color: var(--on-surf); margin-bottom: 1.2rem; }
+
+.editorSection { margin-bottom: 1.5rem; }
+.editorSectionTitle { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--outline); margin-bottom: 0.7rem; }
+.editorSectionTitleRow { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--outline); margin-bottom: 0.7rem; }
+
+.tplSwitcher { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+.tplSw { border: 0.5px solid var(--outline-v); background: var(--surf-lo); border-radius: 0.4rem; padding: 7px 4px; text-align: center; font-size: 0.75rem; color: var(--on-surf-v); transition: all 0.15s; }
+.tplSw:hover { border-color: var(--pr); color: var(--pr); }
+.tplSwActive { border-color: var(--pr); background: var(--pr-cont); color: var(--on-pr-cont); font-weight: 600; }
+
+.editorField { margin-bottom: 0.8rem; }
+.editorFieldLabel { display: block; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--outline); margin-bottom: 0.3rem; }
+.editorInput { width: 100%; background: var(--surf-hi); border: none; border-radius: 0.4rem; padding: 7px 10px; font-size: 0.85rem; color: var(--on-surf); outline: none; transition: all 0.15s; resize: vertical; }
+.editorInput:focus { background: var(--surf-0); box-shadow: 0 0 0 2px rgba(65,97,130,0.15); }
+
+.editorEntry { background: var(--surf-lo); border-radius: 0.5rem; padding: 0.8rem; margin-bottom: 0.6rem; border: 0.5px solid var(--outline-v); }
+.editorEntryHead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; font-size: 0.82rem; font-weight: 500; color: var(--on-surf); }
+.delBtn { background: none; border: none; color: var(--outline-v); font-size: 0.9rem; cursor: pointer; padding: 0 2px; transition: color 0.15s; }
+.delBtn:hover { color: #c0392b; }
+.addSmallBtn { background: none; border: 1px dashed var(--outline-v); color: var(--on-surf-v); padding: 3px 10px; border-radius: 0.4rem; font-size: 0.7rem; cursor: pointer; transition: all 0.15s; }
+.addSmallBtn:hover { border-color: var(--pr); color: var(--pr); }
+
+.actionRegen { width: 100%; padding: 10px; border-radius: var(--r-xl); font-size: 0.85rem; font-weight: 500; cursor: pointer; margin-bottom: 0.5rem; border: none; background: var(--ter-cont); color: var(--on-ter-cont); transition: filter 0.2s; }
+.actionRegen:hover { filter: brightness(0.97); }
+.actionDownload { width: 100%; padding: 10px; border-radius: var(--r-xl); font-size: 0.85rem; font-weight: 500; cursor: pointer; margin-bottom: 1rem; border: none; background: var(--pr); color: var(--on-pr); transition: background 0.2s; }
+.actionDownload:hover { background: var(--pr-dim); }
+
+.cvPanel { overflow-y: auto; background: var(--surf-dim); padding: 2rem; }
+
+.notif { position: fixed; top: 80px; right: 20px; background: var(--pr); color: var(--on-pr); padding: 10px 18px; border-radius: var(--r-xl); font-size: 0.85rem; font-weight: 500; z-index: 999; animation: slideIn 0.3s ease; }
+@keyframes slideIn { from { transform: translateX(120%); } to { transform: translateX(0); } }
+
+@media (max-width: 900px) {
+  .splitLayout { grid-template-columns: 1fr; }
+  .cvPanel { display: none; }
+}

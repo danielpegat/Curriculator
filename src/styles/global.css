@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --pr: #416182;
+  --pr-dim: #355575;
+  --pr-cont: #d0e4ff;
+  --on-pr: #f5f8ff;
+  --on-pr-cont: #345474;
+  --surf: #f9f9fb;
+  --surf-lo: #f2f4f6;
+  --surf-hi: #e4e9ee;
+  --surf-dim: #d3dbe2;
+  --surf-0: #ffffff;
+  --surf-hst: #dde3e9;
+  --on-surf: #2d3338;
+  --on-surf-v: #596065;
+  --outline: #757c81;
+  --outline-v: #acb3b8;
+  --sec-cont: #dbe3ee;
+  --on-sec-cont: #4a535b;
+  --ter-cont: #feeedd;
+  --on-ter-cont: #63584b;
+  --r-xl: 0.5rem;
+  --r-full: 0.75rem;
+  --fn: 'Newsreader', serif;
+  --fb: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--fb);
+  background: var(--surf);
+  color: var(--on-surf);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--fb);
+}
+
+input, textarea, select {
+  font-family: var(--fb);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surf-dim); border-radius: 10px; }

@@ -1,0 +1,62 @@
+.stepBar { display: flex; gap: 2rem; align-items: center; padding: 0.75rem 2rem; border-bottom: 0.5px solid var(--outline-v); background: var(--surf-0); flex-wrap: wrap; }
+.stepItem { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--outline-v); opacity: 0.5; }
+.done { color: var(--pr); opacity: 1; }
+.active { color: var(--on-surf); opacity: 1; }
+.stepDot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid currentColor; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 700; flex-shrink: 0; }
+.done .stepDot { background: var(--pr); border-color: var(--pr); color: #fff; }
+.stepLabel { display: none; }
+@media (min-width: 600px) { .stepLabel { display: block; } }
+
+.layout { display: grid; grid-template-columns: 1fr 300px; min-height: calc(100vh - 128px); }
+.formMain { padding: 2.5rem 2rem; border-right: 0.5px solid var(--outline-v); }
+.formTitle { font-family: var(--fn); font-size: 1.8rem; font-weight: 700; color: var(--on-surf); margin-bottom: 0.4rem; }
+.formSub { font-size: 0.9rem; color: var(--on-surf-v); margin-bottom: 1.5rem; font-style: italic; }
+
+.progressWrap { margin-bottom: 2rem; }
+.progressTrack { height: 3px; background: var(--surf-hi); border-radius: 2px; overflow: hidden; margin-bottom: 0.5rem; }
+.progressFill { height: 100%; background: var(--pr); border-radius: 2px; transition: width 0.5s ease; }
+.progressLabel { font-size: 0.72rem; color: var(--outline); }
+
+.block { background: var(--surf-0); border: 0.5px solid var(--outline-v); border-radius: var(--r-xl); padding: 1.5rem; margin-bottom: 1.2rem; }
+.blockTitle { font-family: var(--fn); font-size: 1.1rem; font-weight: 600; color: var(--on-surf); margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 0.5px solid var(--outline-v); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+
+.fieldGroup { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.2rem; }
+.fieldLabel { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--outline); }
+.fieldInput { background: var(--surf-hi); border: none; border-radius: 0.5rem; padding: 10px 14px; font-size: 0.9rem; color: var(--on-surf); outline: none; transition: all 0.2s; resize: vertical; width: 100%; }
+.fieldInput:focus { background: var(--surf-0); box-shadow: 0 0 0 2px rgba(65,97,130,0.15); }
+.fieldHint { font-size: 0.72rem; color: var(--outline); font-style: italic; }
+
+.expEntry { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--outline-v); }
+.expEntry:last-of-type { border-bottom: none; margin-bottom: 0; }
+.entryHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+.entryLabel { font-size: 0.78rem; color: var(--outline); font-weight: 600; }
+.removeBtn { background: none; border: none; color: var(--outline-v); font-size: 0.9rem; cursor: pointer; padding: 0 4px; transition: color 0.15s; }
+.removeBtn:hover { color: #c0392b; }
+.addBtn { background: none; border: 1.5px dashed var(--outline-v); color: var(--on-surf-v); padding: 8px 16px; border-radius: var(--r-xl); font-size: 0.82rem; cursor: pointer; transition: all 0.2s; width: 100%; margin-top: 0.5rem; }
+.addBtn:hover { border-color: var(--pr); color: var(--pr); }
+
+.formNav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 0.5px solid var(--outline-v); }
+.btnBack { background: transparent; border: 0.5px solid var(--outline-v); color: var(--on-surf-v); padding: 10px 22px; border-radius: var(--r-xl); font-size: 0.9rem; transition: all 0.2s; }
+.btnBack:hover { background: var(--surf-hi); color: var(--on-surf); }
+.btnGenerate { background: var(--pr); color: var(--on-pr); border: none; padding: 12px 28px; border-radius: var(--r-xl); font-size: 0.95rem; font-weight: 600; transition: background 0.2s; }
+.btnGenerate:hover { background: var(--pr-dim); }
+
+.sidebar { padding: 2rem 1.5rem; background: var(--surf-lo); }
+.sidebarSticky { position: sticky; top: 80px; }
+.previewCard { background: var(--surf-dim); border-radius: var(--r-xl); padding: 1.2rem; aspect-ratio: 3/4; margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: center; }
+.previewMock { background: #fff; border-radius: 0.5rem; width: 90%; height: 90%; box-shadow: 0 4px 16px rgba(45,51,56,.12); padding: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.pcvName { font-family: var(--fn); font-size: 0.85rem; font-weight: 700; color: var(--on-surf); }
+.pcvTitle { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pr); margin-bottom: 0.1rem; }
+.pcvLine { height: 1.5px; background: var(--surf-hi); border-radius: 1px; }
+.pcvSection { margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.2rem; }
+.pcvSectionLabel { font-size: 0.55rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pr); margin-bottom: 0.1rem; }
+.tipCard { background: rgba(254,238,221,0.6); border: 0.5px solid #efe0cf; border-radius: var(--r-xl); padding: 1rem; }
+.tipHead { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--on-ter-cont); margin-bottom: 0.5rem; }
+.tipBody { font-size: 0.8rem; color: var(--on-ter-cont); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .row2 { grid-template-columns: 1fr; }
+}

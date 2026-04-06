@@ -1,0 +1,309 @@
+.paper {
+  background: #fff;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(45, 51, 56, 0.12);
+  border-radius: 4px;
+  min-height: 900px;
+  font-family: var(--fb);
+}
+
+/* ── BODY ── */
+.body {
+  padding: 1.5rem 2.5rem;
+}
+
+/* ── SECTION TITLES ── */
+.sectionTitle {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--on-surf);
+  border-bottom: 0.5px solid var(--surf-dim);
+  padding-bottom: 0.3rem;
+  margin: 1.2rem 0 0.7rem;
+}
+
+.sectionTitleBlue {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pr);
+  border-left: 2.5px solid var(--pr);
+  padding-left: 0.5rem;
+  margin: 1rem 0 0.6rem;
+}
+
+.sectionTitleGold {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--pr);
+  margin: 1.3rem 0 0.7rem;
+}
+
+/* ── ENTRIES ── */
+.entry {
+  margin-bottom: 0.8rem;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.entryExec {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.org {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--on-surf);
+}
+
+.role {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--on-surf-v);
+}
+
+.roleBlue {
+  color: var(--pr);
+  font-style: normal;
+  font-size: 0.78rem;
+}
+
+.date {
+  font-size: 0.72rem;
+  color: var(--on-surf-v);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.desc {
+  font-size: 0.78rem;
+  color: #444;
+  line-height: 1.55;
+  margin-top: 0.3rem;
+}
+
+/* ── SKILLS ── */
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.skill {
+  font-size: 0.7rem;
+  background: var(--surf-lo);
+  padding: 3px 9px;
+  border-radius: 3px;
+  color: var(--on-surf-v);
+}
+
+.skillBlock {
+  display: block;
+  background: none;
+  padding: 3px 0;
+  border-bottom: 0.5px solid var(--surf-hi);
+  font-size: 0.72rem;
+  border-radius: 0;
+}
+
+.skillExec {
+  background: none;
+  border: 0.5px solid var(--pr);
+  color: var(--on-pr-cont);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+/* ── MISC ── */
+.summaryText {
+  font-size: 0.95rem;
+  font-family: var(--fn);
+  font-style: italic;
+  color: #444;
+  line-height: 1.65;
+}
+
+.summaryItalic {
+  font-size: 0.8rem;
+  color: #444;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.summaryExec {
+  font-size: 0.82rem;
+  color: #444;
+  line-height: 1.65;
+  border-left: 2.5px solid var(--pr);
+  padding-left: 0.8rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.langs {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.langsSmall {
+  font-size: 0.72rem;
+  color: var(--on-surf-v);
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.mt1 {
+  margin-top: 1rem;
+}
+
+.paperFooter {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 0.5px solid var(--surf-hi);
+  text-align: center;
+  font-size: 0.6rem;
+  color: var(--outline-v);
+  letter-spacing: 0.1em;
+}
+
+/* ── HARVARD ── */
+.harvardHeader {
+  padding: 2rem 2.5rem 1.2rem;
+  border-bottom: 2px solid var(--on-surf);
+}
+
+.harvardName {
+  font-family: var(--fn);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--on-surf);
+  letter-spacing: -0.03em;
+}
+
+.harvardTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--on-surf-v);
+  margin-top: 0.2rem;
+}
+
+.harvardContact {
+  font-size: 0.72rem;
+  color: var(--on-surf-v);
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* ── MODERN ── */
+.modernHeader {
+  background: var(--on-surf);
+  padding: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-family: var(--fn);
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.modernName {
+  font-family: var(--fn);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.modernTitle {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.modernContact {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.modernBody {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 1.5rem;
+}
+
+.modernSidebar {
+  border-left: 0.5px solid var(--surf-hi);
+  padding-left: 1rem;
+}
+
+/* ── EXECUTIVE ── */
+.execHeader {
+  padding: 2.5rem 2.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 3px solid var(--on-surf);
+}
+
+.execName {
+  font-family: var(--fn);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--on-surf);
+  line-height: 1;
+}
+
+.execTitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--pr);
+  margin-top: 0.4rem;
+}
+
+.execContact {
+  text-align: right;
+  font-size: 0.72rem;
+  color: var(--on-surf-v);
+  line-height: 1.9;
+}
