@@ -6,19 +6,24 @@ import TemplateSelector from './pages/TemplateSelector.jsx'
 import Form from './pages/Form.jsx'
 import Generating from './pages/Generating.jsx'
 import Editor from './pages/Editor.jsx'
+import Auth from './pages/Auth.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
 
 export default function App() {
   return (
-    <CVProvider>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/templates" element={<TemplateSelector />} />
-        <Route path="/form" element={<Form />} />
-        <Route path="/generating" element={<Generating />} />
-        <Route path="/editor" element={<Editor />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </CVProvider>
+    <AuthProvider>
+      <CVProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/templates" element={<TemplateSelector />} />
+          <Route path="/form" element={<Form />} />
+          <Route path="/generating" element={<Generating />} />
+          <Route path="/editor" element={<Editor />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </CVProvider>
+    </AuthProvider>
   )
 }

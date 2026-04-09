@@ -151,10 +151,10 @@ export default function Landing() {
           <div className={styles.footerCopy}>© 2024 Curriculator. The Executive Choice.</div>
         </div>
         <div className={styles.footerLinks}>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms</a>
-          <a href="#">Help Center</a>
-          <a href="#">Contact</a>
+          <a href="#" onClick={e => e.preventDefault()}>Privacy Policy</a>
+          <a href="#" onClick={e => e.preventDefault()}>Terms</a>
+          <a href="#" onClick={e => e.preventDefault()}>Help Center</a>
+          <a href="#" onClick={e => e.preventDefault()}>Contact</a>
         </div>
       </footer>
     </main>

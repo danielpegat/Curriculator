@@ -1,7 +1,12 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useCVStore } from '../store/cvStore.jsx'
 import CVPreview from '../components/CVPreview.jsx'
 import AIChat from '../components/AIChat.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
+import { supabase } from '../supabase.js'
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
 import styles from './Editor.module.css'
 
 const TEMPLATES = ['harvard', 'modern', 'executive']
@@ -11,15 +16,84 @@ function Notif({ message }) {
 }
 
 export default function Editor() {
-  const { selectedTemplate, setSelectedTemplate, cvData, updateCvData, updateExp, addExp, removeExp } = useCVStore()
+  const { selectedTemplate, setSelectedTemplate, cvData, updateCvData, updateExp, addExp, removeExp, updateEdu, addEdu, removeEdu } = useCVStore()
   const [notif, setNotif] = useState('')
+  const { user } = useAuth()
+  const navigate = useNavigate()
+  const cvContainerRef = useRef(null)
 
   const showNotif = (msg) => {
     setNotif(msg)
     setTimeout(() => setNotif(''), 3000)
   }
 
-  const contact = [cvData.email, cvData.phone, cvData.location, cvData.link].filter(Boolean).join(' · ')
+  const handleSaveDraft = async () => {
+    if (!user) {
+      navigate('/auth')
+      return
+    }
+    showNotif('Saving draft...')
+    const { error } = await supabase.from('cv_drafts').upsert({
+      id: user.id,
+      template: selectedTemplate,
+      cv_data: cvData,
+      updated_at: new Date().toISOString()
+    })
+
+    if (error) {
+      showNotif('Error saving draft.')
+      console.error(error)
+    } else {
+      showNotif('Draft saved successfully!')
+    }
+  }
+
+  const handleDownloadPDF = async () => {
+    if (!cvContainerRef.current) return
+    showNotif('Generating PDF, please wait...')
+
+    try {
+      const element = cvContainerRef.current
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: false
+      })
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.95)
+      // A4 format: 210x297 mm
+      const pdf = new jsPDF('p', 'mm', 'a4')
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth()
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width
+
+      pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight)
+      pdf.save('Curriculator_CV.pdf')
+      
+      showNotif('PDF downloaded successfully!')
+    } catch (err) {
+      console.error('Error generating PDF:', err)
+      showNotif('Error generating PDF.')
+    }
+  }
+
+  useEffect(() => {
+    const onSave = () => handleSaveDraft()
+    const onDownload = () => handleDownloadPDF()
+    window.addEventListener('trigger-save-draft', onSave)
+    window.addEventListener('trigger-download-pdf', onDownload)
+    return () => {
+      window.removeEventListener('trigger-save-draft', onSave)
+      window.removeEventListener('trigger-download-pdf', onDownload)
+    }
+  }, [user, selectedTemplate, cvData])
+
+  const handleAIScroll = () => {
+    const chatEl = document.getElementById('ai-chat-section')
+    if (chatEl) {
+      chatEl.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -34,8 +108,8 @@ export default function Editor() {
           </span>
         </div>
         <div className={styles.editorNavActions}>
-          <button className={styles.btnOutline} onClick={() => showNotif('Draft saved!')}>Save Draft</button>
-          <button className={styles.btnPrimary} onClick={() => showNotif('PDF downloaded! (connect a PDF library for production)')}>Download PDF</button>
+          <button className={styles.btnOutline} onClick={handleSaveDraft}>Save Draft</button>
+          <button className={styles.btnPrimary} onClick={handleDownloadPDF}>Download PDF</button>
         </div>
       </div>
 
@@ -66,7 +140,10 @@ export default function Editor() {
             <div className={styles.editorSectionTitle}>Identity &amp; Contact</div>
             <EditorField label="Name" value={cvData.name} onChange={v => updateCvData({ name: v })} />
             <EditorField label="Title" value={cvData.title} onChange={v => updateCvData({ title: v })} />
-            <EditorField label="Contact line" value={contact} onChange={v => updateCvData({ email: v })} placeholder="email · phone · location" />
+            <EditorField label="Email" value={cvData.email} onChange={v => updateCvData({ email: v })} />
+            <EditorField label="Phone" value={cvData.phone} onChange={v => updateCvData({ phone: v })} />
+            <EditorField label="Location" value={cvData.location} onChange={v => updateCvData({ location: v })} />
+            <EditorField label="Portfolio Link" value={cvData.link} onChange={v => updateCvData({ link: v })} />
           </div>
 
           {/* Summary */}
@@ -95,21 +172,50 @@ export default function Editor() {
             ))}
           </div>
 
+          {/* Education */}
+          <div className={styles.editorSection}>
+            <div className={styles.editorSectionTitleRow}>
+              <span>Education</span>
+              <button className={styles.addSmallBtn} onClick={addEdu}>+ Add</button>
+            </div>
+            {cvData.edus?.map((edu, i) => (
+              <div key={i} className={styles.editorEntry}>
+                <div className={styles.editorEntryHead}>
+                  <span>{edu.role || 'Degree'} @ {edu.org || 'Institution'}</span>
+                  <button className={styles.delBtn} onClick={() => removeEdu(i)}>✕</button>
+                </div>
+                <EditorField label="Institution" value={edu.org} onChange={v => updateEdu(i, 'org', v)} />
+                <EditorField label="Degree" value={edu.role} onChange={v => updateEdu(i, 'role', v)} />
+                <EditorField label="Year" value={edu.date} onChange={v => updateEdu(i, 'date', v)} />
+              </div>
+            ))}
+          </div>
+
           {/* Skills */}
           <div className={styles.editorSection}>
             <div className={styles.editorSectionTitle}>Curated Skills</div>
             <EditorField label="Skills (comma-separated)" textarea value={cvData.skills} onChange={v => updateCvData({ skills: v })} />
           </div>
 
-          <button className={styles.actionRegen} onClick={() => {}}>✦ Improve with AI</button>
-          <button className={styles.actionDownload} onClick={() => showNotif('PDF downloaded!')}>↓ Download as PDF</button>
+          {/* Languages */}
+          <div className={styles.editorSection}>
+            <div className={styles.editorSectionTitle}>Languages</div>
+            <EditorField label="Languages (comma-separated)" textarea value={cvData.langs} onChange={v => updateCvData({ langs: v })} />
+          </div>
 
-          <AIChat />
+          <button className={styles.actionRegen} onClick={handleAIScroll}>✦ Improve with AI</button>
+          <button className={styles.actionDownload} onClick={handleDownloadPDF}>↓ Download as PDF</button>
+
+          <div id="ai-chat-section">
+            <AIChat />
+          </div>
         </section>
 
         {/* RIGHT: CV PREVIEW */}
         <section className={styles.cvPanel}>
-          <CVPreview cvData={cvData} template={selectedTemplate} />
+          <div ref={cvContainerRef} style={{ width: '100%', height: '100%', padding: '20px' }}>
+            <CVPreview cvData={cvData} template={selectedTemplate} />
+          </div>
         </section>
       </div>
     </div>

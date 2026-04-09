@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
+import { supabase } from '../supabase.js'
 
 const CVContext = createContext(null)
 
@@ -17,6 +18,26 @@ export function CVProvider({ children }) {
     exps: [{ org: '', role: '', date: '', desc: '' }],
     edus: [{ org: '', role: '', date: '' }],
   })
+
+  // Load draft from Supabase on mount
+  useEffect(() => {
+    const fetchDraft = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.user) {
+        const { data, error } = await supabase
+          .from('cv_drafts')
+          .select('template, cv_data')
+          .eq('id', session.user.id)
+          .single()
+
+        if (!error && data) {
+          if (data.template) setSelectedTemplate(data.template)
+          if (data.cv_data) setCvData(data.cv_data)
+        }
+      }
+    }
+    fetchDraft()
+  }, [])
 
   const updateCvData = (updates) => {
     setCvData(prev => ({ ...prev, ...updates }))
